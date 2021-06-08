@@ -2,6 +2,10 @@
 
 This component provides a convenience function to display [Yellowbrick](https://www.scikit-yb.org/en/latest/index.html) [visualizers](https://www.scikit-yb.org/en/latest/api/index.html) in Streamlit.
 
+## Installation
+
+`pip install streamlit-yellowbrick`
+
 ## Example usage
 
 ```python
