@@ -9,6 +9,31 @@ import warnings
 warnings.filterwarnings('ignore', category=UserWarning)
 
 def st_yellowbrick(visualizer, scrolling=False):
+    """Embed a Yellowbrick visualizer within a Streamlit app
+    Parameters
+    ----------
+    visualizer: 
+        Yellowbrick visualizer that has been fit to data.
+    scrolling: bool
+        If True, show a scrollbar when the content is larger than the iframe. 
+        Otherwise, do not show a scrollbar. Defaults to False.
+    
+    Example
+    -------
+    >>> import streamlit as st
+    >>> from streamlit_yellowbrick import st_yellowbrick
+
+    >>> from yellowbrick.datasets import load_credit
+    >>> from yellowbrick.features import PCA
+
+    >>> X, y = load_credit()
+    >>> classes = ['account in default', 'current with bills']
+
+    >>> visualizer = PCA(scale=True, classes=classes)
+    >>> visualizer.fit_transform(X, y)  # Fit the data to the visualizer
+
+    >>> st_yellowbrick(visualizer) # Use in place of visualizer.show()
+    """
 
     if isinstance(visualizer.fig, Figure):
         height = visualizer.size[1]
