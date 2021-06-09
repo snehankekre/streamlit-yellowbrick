@@ -25,3 +25,9 @@ st_yellowbrick(visualizer)      # Finalize and render the figure
 ```
 
 ![st_yellowbrick](https://github.com/snehankekre/streamlit-yellowbrick/blob/master/_static/example.png)
+
+## Live demo
+
+View a [live demo](https://share.streamlit.io/snehankekre/streamlit-yellowbrick/examples/app.py) on Streamlit sharing!
+
+![st_example](https://i.imgur.com/OPZ5ulZ.mp4)
