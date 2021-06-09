@@ -53,6 +53,9 @@ def st_yellowbrick(visualizer, scrolling=False):
     data = base64.b64encode(buf.getbuffer()).decode("ascii")
     html_str = f"<img src='data:image/png;base64,{data}'/>"
 
+    plt.cla()
+    plt.close(fig)
+
     return components.html(
         html_str,
         height=height,
