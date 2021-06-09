@@ -30,4 +30,6 @@ st_yellowbrick(visualizer)      # Finalize and render the figure
 
 View a [live demo](https://share.streamlit.io/snehankekre/streamlit-yellowbrick/examples/app.py) on Streamlit sharing!
 
-![st_example](https://i.imgur.com/OPZ5ulZ.mp4)
+https://user-images.githubusercontent.com/20672874/121356733-c2564d80-c94e-11eb-8587-e8a4afdcc62d.mp4
+
+
