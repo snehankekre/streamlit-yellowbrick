@@ -1,2 +1,5 @@
 streamlit >= 0.81
-streamlit-yellowbrick
+streamlit_yellowbrick
+numpy
+yellowbrick
+scikit_learn
