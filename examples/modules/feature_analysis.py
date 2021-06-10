@@ -38,31 +38,29 @@ def run_feature_analysis():
             with col1:
                 radviz()
 
-            with col2:
+            col2.code(
+"""
+import streamlit as st
+from streamlit_yellowbrick import st_yellowbrick
 
-                st.code(
-                    """
-                    import streamlit as st
-                    from streamlit_yellowbrick import st_yellowbrick
+from yellowbrick.datasets import load_occupancy
+from yellowbrick.features import RadViz
 
-                    from yellowbrick.datasets import load_occupancy
-                    from yellowbrick.features import RadViz
+# Load the classification dataset
+X, y = load_occupancy()
 
-                    # Load the classification dataset
-                    X, y = load_occupancy()
+# Specify the target classes
+classes = ["unoccupied", "occupied"]
 
-                    # Specify the target classes
-                    classes = ["unoccupied", "occupied"]
+# Instantiate the visualizer
+visualizer = RadViz(classes=classes)
 
-                    # Instantiate the visualizer
-                    visualizer = RadViz(classes=classes)
+visualizer.fit(X, y)           # Fit the data to the visualizer
+visualizer.transform(X)        # Transform the data
 
-                    visualizer.fit(X, y)           # Fit the data to the visualizer
-                    visualizer.transform(X)        # Transform the data
-
-                    st_yellowbrick(visualizer)     # Finalize and render the figure
-                    """
-                )
+st_yellowbrick(visualizer)     # Finalize and render the figure
+"""
+            , language="python")
 
     if "Parallel Coordinates" in feature_analysis_visualizers:
 
@@ -87,37 +85,35 @@ def run_feature_analysis():
             with col1:
                 parallel_coordinates()
 
-            with col2:
+            col2.code(
+"""
+import streamlit as st
+from streamlit_yellowbrick import st_yellowbrick
 
-                st.code(
-                    """
-                    import streamlit as st
-                    from streamlit_yellowbrick import st_yellowbrick
+from yellowbrick.features import ParallelCoordinates
+from yellowbrick.datasets import load_occupancy
 
-                    from yellowbrick.features import ParallelCoordinates
-                    from yellowbrick.datasets import load_occupancy
+# Load the classification data set
+X, y = load_occupancy()
 
-                    # Load the classification data set
-                    X, y = load_occupancy()
+# Specify the features of interest and the classes of the target
+features = [
+    "temperature", "relative humidity", "light", "CO2", "humidity"
+]
+classes = ["unoccupied", "occupied"]
 
-                    # Specify the features of interest and the classes of the target
-                    features = [
-                        "temperature", "relative humidity", "light", "CO2", "humidity"
-                    ]
-                    classes = ["unoccupied", "occupied"]
+# Instantiate the visualizer
+visualizer = ParallelCoordinates(
+    classes=classes, features=features, sample=0.05, shuffle=True
+)
 
-                    # Instantiate the visualizer
-                    visualizer = ParallelCoordinates(
-                        classes=classes, features=features, sample=0.05, shuffle=True
-                    )
+# Fit and transform the data to the visualizer
+visualizer.fit_transform(X, y)
 
-                    # Fit and transform the data to the visualizer
-                    visualizer.fit_transform(X, y)
-
-                    # Finalize the title and axes then display the visualization
-                    st_yellowbrick(visualizer)
-                    """
-                )
+# Finalize the title and axes then display the visualization
+st_yellowbrick(visualizer)
+"""
+            , language="python")
 
     if "Joint Plot Visualization" in feature_analysis_visualizers:
 
@@ -137,26 +133,24 @@ def run_feature_analysis():
             with col1:
                 joint_plot()
 
-            with col2:
+            col2.code(
+"""
+import streamlit as st
+from streamlit_yellowbrick import st_yellowbrick
 
-                st.code(
-                    """
-                    import streamlit as st
-                    from streamlit_yellowbrick import st_yellowbrick
+from yellowbrick.datasets import load_concrete
+from yellowbrick.features import JointPlotVisualizer
 
-                    from yellowbrick.datasets import load_concrete
-                    from yellowbrick.features import JointPlotVisualizer
+# Load the dataset
+X, y = load_concrete()
 
-                    # Load the dataset
-                    X, y = load_concrete()
+# Instantiate the visualizer
+visualizer = JointPlotVisualizer(columns="cement")
 
-                    # Instantiate the visualizer
-                    visualizer = JointPlotVisualizer(columns="cement")
-
-                    visualizer.fit_transform(X, y)        # Fit and transform the data
-                    st_yellowbrick(visualizer)            # Finalize and render the figure
-                    """
-                )
+visualizer.fit_transform(X, y)        # Fit and transform the data
+st_yellowbrick(visualizer)            # Finalize and render the figure
+"""
+            , language="python")
 
     if "PCA" in feature_analysis_visualizers:
 
@@ -187,23 +181,21 @@ def run_feature_analysis():
             with col1:
                 PCA()
 
-            with col2:
+            col2.code(
+"""
+import streamlit as st
+from streamlit_yellowbrick import st_yellowbrick
 
-                st.code(
-                    """
-                    import streamlit as st
-                    from streamlit_yellowbrick import st_yellowbrick
+from yellowbrick.datasets import load_concrete
+from yellowbrick.features import PCA
 
-                    from yellowbrick.datasets import load_concrete
-                    from yellowbrick.features import PCA
+X, y = load_concrete()
 
-                    X, y = load_concrete()
-
-                    visualizer = PCA(scale=True, proj_features=True, projection=3)
-                    visualizer.fit_transform(X, y)
-                    st_yellowbrick(visualizer)
-                    """
-                )
+visualizer = PCA(scale=True, proj_features=True, projection=3)
+visualizer.fit_transform(X, y)
+st_yellowbrick(visualizer)
+"""
+            , language="python")
 
     return None
 
