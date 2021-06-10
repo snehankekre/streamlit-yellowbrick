@@ -39,40 +39,39 @@ def run_classification():
             with col1:
                 classification_report()
 
-            with col2:
 
-                st.code(
-                    """
-                    import streamlit as st
-                    from streamlit_yellowbrick import st_yellowbrick
+            col2.code(
+"""
+import streamlit as st
+from streamlit_yellowbrick import st_yellowbrick
 
-                    from sklearn.model_selection import TimeSeriesSplit
-                    from sklearn.naive_bayes import GaussianNB
+from sklearn.model_selection import TimeSeriesSplit
+from sklearn.naive_bayes import GaussianNB
 
-                    from yellowbrick.classifier import ClassificationReport
-                    from yellowbrick.datasets import load_occupancy
+from yellowbrick.classifier import ClassificationReport
+from yellowbrick.datasets import load_occupancy
 
-                    # Load the classification dataset
-                    X, y = load_occupancy()
+# Load the classification dataset
+X, y = load_occupancy()
 
-                    # Specify the target classes
-                    classes = ["unoccupied", "occupied"]
+# Specify the target classes
+classes = ["unoccupied", "occupied"]
 
-                    # Create the training and test data
-                    tscv = TimeSeriesSplit()
-                    for train_index, test_index in tscv.split(X):
-                        X_train, X_test = X.iloc[train_index], X.iloc[test_index]
-                        y_train, y_test = y.iloc[train_index], y.iloc[test_index]
+# Create the training and test data
+tscv = TimeSeriesSplit()
+for train_index, test_index in tscv.split(X):
+    X_train, X_test = X.iloc[train_index], X.iloc[test_index]
+    y_train, y_test = y.iloc[train_index], y.iloc[test_index]
 
-                    # Instantiate the classification model and visualizer
-                    model = GaussianNB()
-                    visualizer = ClassificationReport(model, classes=classes, support=True)
+# Instantiate the classification model and visualizer
+model = GaussianNB()
+visualizer = ClassificationReport(model, classes=classes, support=True)
 
-                    visualizer.fit(X_train, y_train)        # Fit the visualizer and the model
-                    visualizer.score(X_test, y_test)        # Evaluate the model on the test data
-                    st_yellowbrick(visualizer)              # Finalize and show the figure
-                    """
-                )
+visualizer.fit(X_train, y_train)        # Fit the visualizer and the model
+visualizer.score(X_test, y_test)        # Evaluate the model on the test data
+st_yellowbrick(visualizer)              # Finalize and show the figure
+"""
+            , language="python")
 
     if "ROCAUC" in classification_visualizers:
 
@@ -93,34 +92,33 @@ def run_classification():
             with col1:
                 rocauc()
 
-            with col2:
 
-                st.code(
-                    """
-                    import streamlit as st
-                    from streamlit_yellowbrick import st_yellowbrick
+            col2.code(
+                """
+import streamlit as st
+from streamlit_yellowbrick import st_yellowbrick
 
-                    from sklearn.linear_model import LogisticRegression
-                    from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
 
-                    from yellowbrick.classifier import ROCAUC
-                    from yellowbrick.datasets import load_spam
+from yellowbrick.classifier import ROCAUC
+from yellowbrick.datasets import load_spam
 
-                    # Load the classification dataset
-                    X, y = load_spam()
+# Load the classification dataset
+X, y = load_spam()
 
-                    # Create the training and test data
-                    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
+# Create the training and test data
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
 
-                    # Instantiate the visualizer with the classification model
-                    model = LogisticRegression(multi_class="auto", solver="liblinear")
-                    visualizer = ROCAUC(model, classes=["not_spam", "is_spam"])
+# Instantiate the visualizer with the classification model
+model = LogisticRegression(multi_class="auto", solver="liblinear")
+visualizer = ROCAUC(model, classes=["not_spam", "is_spam"])
 
-                    visualizer.fit(X_train, y_train)        # Fit the training data to the visualizer
-                    visualizer.score(X_test, y_test)        # Evaluate the model on the test data
-                    st_yellowbrick(visualizer)              # Finalize and show the figure
-                    """
-                )
+visualizer.fit(X_train, y_train)        # Fit the training data to the visualizer
+visualizer.score(X_test, y_test)        # Evaluate the model on the test data
+st_yellowbrick(visualizer)              # Finalize and show the figure
+"""
+            , language="python")
 
     if "Multi-class ROCAUC Curves" in classification_visualizers:
 
@@ -144,39 +142,38 @@ def run_classification():
             with col1:
                 multi_class_rocauc()
 
-            with col2:
 
-                st.code(
-                    """
-                    import streamlit as st
-                    from streamlit_yellowbrick import st_yellowbrick
+            col2.code(
+"""
+import streamlit as st
+from streamlit_yellowbrick import st_yellowbrick
 
-                    from sklearn.linear_model import RidgeClassifier
-                    from sklearn.model_selection import train_test_split
-                    from sklearn.preprocessing import OrdinalEncoder, LabelEncoder
+from sklearn.linear_model import RidgeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OrdinalEncoder, LabelEncoder
 
-                    from yellowbrick.classifier import ROCAUC
-                    from yellowbrick.datasets import load_game
+from yellowbrick.classifier import ROCAUC
+from yellowbrick.datasets import load_game
 
-                    # Load multi-class classification dataset
-                    X, y = load_game()
+# Load multi-class classification dataset
+X, y = load_game()
 
-                    # Encode the non-numeric columns
-                    X = OrdinalEncoder().fit_transform(X)
-                    y = LabelEncoder().fit_transform(y)
+# Encode the non-numeric columns
+X = OrdinalEncoder().fit_transform(X)
+y = LabelEncoder().fit_transform(y)
 
-                    # Create the train and test data
-                    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
+# Create the train and test data
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
 
-                    # Instaniate the classification model and visualizer
-                    model = RidgeClassifier()
-                    visualizer = ROCAUC(model, classes=["win", "loss", "draw"])
+# Instaniate the classification model and visualizer
+model = RidgeClassifier()
+visualizer = ROCAUC(model, classes=["win", "loss", "draw"])
 
-                    visualizer.fit(X_train, y_train)        # Fit the training data to the visualizer
-                    visualizer.score(X_test, y_test)        # Evaluate the model on the test data
-                    st_yellowbrick(visualizer)              # Finalize and render the figure
-                    """
-                )
+visualizer.fit(X_train, y_train)        # Fit the training data to the visualizer
+visualizer.score(X_test, y_test)        # Evaluate the model on the test data
+st_yellowbrick(visualizer)              # Finalize and render the figure
+"""
+            , language="python")
 
     if "Class Prediction Error" in classification_visualizers:
 
@@ -206,48 +203,46 @@ def run_classification():
             with col1:
                 class_prediction_error()
 
-            with col2:
+            col2.code(
+"""
+import streamlit as st
+from streamlit_yellowbrick import st_yellowbrick
 
-                st.code(
-                    """
-                    import streamlit as st
-                    from streamlit_yellowbrick import st_yellowbrick
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from yellowbrick.classifier import ClassPredictionError
 
-                    from sklearn.datasets import make_classification
-                    from sklearn.model_selection import train_test_split
-                    from sklearn.ensemble import RandomForestClassifier
-                    from yellowbrick.classifier import ClassPredictionError
+# Create classification dataset
+X, y = make_classification(
+    n_samples=1000,
+    n_classes=5,
+    n_informative=3,
+    n_clusters_per_class=1,
+    random_state=36,
+)
 
-                    # Create classification dataset
-                    X, y = make_classification(
-                        n_samples=1000,
-                        n_classes=5,
-                        n_informative=3,
-                        n_clusters_per_class=1,
-                        random_state=36,
-                    )
+classes = ["apple", "kiwi", "pear", "banana", "orange"]
 
-                    classes = ["apple", "kiwi", "pear", "banana", "orange"]
+# Perform 80/20 training/test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.20, random_state=42
+)
+# Instantiate the classification model and visualizer
+visualizer = ClassPredictionError(
+    RandomForestClassifier(random_state=42, n_estimators=10), classes=classes
+)
 
-                    # Perform 80/20 training/test split
-                    X_train, X_test, y_train, y_test = train_test_split(
-                        X, y, test_size=0.20, random_state=42
-                    )
-                    # Instantiate the classification model and visualizer
-                    visualizer = ClassPredictionError(
-                        RandomForestClassifier(random_state=42, n_estimators=10), classes=classes
-                    )
+# Fit the training data to the visualizer
+visualizer.fit(X_train, y_train)
 
-                    # Fit the training data to the visualizer
-                    visualizer.fit(X_train, y_train)
+# Evaluate the model on the test data
+visualizer.score(X_test, y_test)
 
-                    # Evaluate the model on the test data
-                    visualizer.score(X_test, y_test)
-
-                    # Draw visualization
-                    st_yellowbrick(visualizer)
-                    """
-                )
+# Draw visualization
+st_yellowbrick(visualizer)
+"""
+            , language="python")
 
     if "Confusion Matrix" in classification_visualizers:
 
@@ -271,39 +266,37 @@ def run_classification():
             with col1:
                 confusion_matrix()
 
-            with col2:
+                col2.code(
+"""
+import streamlit as st
+from streamlit_yellowbrick import st_yellowbrick
 
-                st.code(
-                    """
-                    import streamlit as st
-                    from streamlit_yellowbrick import st_yellowbrick
+from sklearn.datasets import load_iris
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split as tts
 
-                    from sklearn.datasets import load_iris
-                    from sklearn.linear_model import LogisticRegression
-                    from sklearn.model_selection import train_test_split as tts
+from yellowbrick.classifier import ConfusionMatrix
 
-                    from yellowbrick.classifier import ConfusionMatrix
+iris = load_iris()
+X = iris.data
+y = iris.target
+classes = iris.target_names
 
-                    iris = load_iris()
-                    X = iris.data
-                    y = iris.target
-                    classes = iris.target_names
+X_train, X_test, y_train, y_test = tts(X, y, test_size=0.2)
 
-                    X_train, X_test, y_train, y_test = tts(X, y, test_size=0.2)
+model = LogisticRegression(multi_class="auto", solver="liblinear")
 
-                    model = LogisticRegression(multi_class="auto", solver="liblinear")
+iris_cm = ConfusionMatrix(
+    model,
+    classes=classes,
+    label_encoder={0: "setosa", 1: "versicolor", 2: "virginica"},
+)
 
-                    iris_cm = ConfusionMatrix(
-                        model,
-                        classes=classes,
-                        label_encoder={0: "setosa", 1: "versicolor", 2: "virginica"},
-                    )
-
-                    iris_cm.fit(X_train, y_train)
-                    iris_cm.score(X_test, y_test)
-                    st_yellowbrick(iris_cm)
-                    """
-                )
+iris_cm.fit(X_train, y_train)
+iris_cm.score(X_test, y_test)
+st_yellowbrick(iris_cm)
+"""
+                , language="python")
 
     if "Discrimination Threshold" in classification_visualizers:
 
@@ -326,29 +319,27 @@ def run_classification():
             with col1:
                 discrimination_threshold()
 
-            with col2:
+                col2.code(
+"""
+import streamlit as st
+from streamlit_yellowbrick import st_yellowbrick
 
-                st.code(
-                    """
-                    import streamlit as st
-                    from streamlit_yellowbrick import st_yellowbrick
+from sklearn.linear_model import LogisticRegression
 
-                    from sklearn.linear_model import LogisticRegression
+from yellowbrick.classifier import DiscriminationThreshold
+from yellowbrick.datasets import load_spam
 
-                    from yellowbrick.classifier import DiscriminationThreshold
-                    from yellowbrick.datasets import load_spam
+# Load a binary classification dataset
+X, y = load_spam()
 
-                    # Load a binary classification dataset
-                    X, y = load_spam()
+# Instantiate the classification model and visualizer
+model = LogisticRegression(multi_class="auto", solver="liblinear")
+visualizer = DiscriminationThreshold(model)
 
-                    # Instantiate the classification model and visualizer
-                    model = LogisticRegression(multi_class="auto", solver="liblinear")
-                    visualizer = DiscriminationThreshold(model)
-
-                    visualizer.fit(X, y)        # Fit the data to the visualizer
-                    st_yellowbrick(visualizer)  # Finalize and render the figure
-                    """
-                )
+visualizer.fit(X, y)        # Fit the data to the visualizer
+st_yellowbrick(visualizer)  # Finalize and render the figure
+"""
+                , language="python")
 
     return None
 

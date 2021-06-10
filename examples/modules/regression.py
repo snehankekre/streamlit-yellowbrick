@@ -37,34 +37,32 @@ def run_regression():
             with col1:
                 residuals_plot()
 
-            with col2:
+            col2.code(
+"""
+import streamlit as st
+from streamlit_yellowbrick import st_yellowbrick
 
-                st.code(
-                    """
-                    import streamlit as st
-                    from streamlit_yellowbrick import st_yellowbrick
+from sklearn.linear_model import Ridge
+from sklearn.model_selection import train_test_split
 
-                    from sklearn.linear_model import Ridge
-                    from sklearn.model_selection import train_test_split
+from yellowbrick.datasets import load_concrete
+from yellowbrick.regressor import ResidualsPlot
 
-                    from yellowbrick.datasets import load_concrete
-                    from yellowbrick.regressor import ResidualsPlot
+# Load a regression dataset
+X, y = load_concrete()
 
-                    # Load a regression dataset
-                    X, y = load_concrete()
+# Create the train and test data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-                    # Create the train and test data
-                    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Instantiate the linear model and visualizer
+model = Ridge()
+visualizer = ResidualsPlot(model)
 
-                    # Instantiate the linear model and visualizer
-                    model = Ridge()
-                    visualizer = ResidualsPlot(model)
-
-                    visualizer.fit(X_train, y_train)  # Fit the training data to the visualizer
-                    visualizer.score(X_test, y_test)  # Evaluate the model on the test data
-                    st_yellowbrick(visualizer)        # Finalize and render the figure
-                    """
-                )
+visualizer.fit(X_train, y_train)  # Fit the training data to the visualizer
+visualizer.score(X_test, y_test)  # Evaluate the model on the test data
+st_yellowbrick(visualizer)        # Finalize and render the figure
+"""
+            , language="python")
 
     if "Prediction Error Plot" in regression_visualizers:
 
@@ -87,34 +85,32 @@ def run_regression():
             with col1:
                 prediction_error()
 
-            with col2:
+            col2.code(
+"""
+import streamlit as st
+from streamlit_yellowbrick import st_yellowbrick
 
-                st.code(
-                    """
-                    import streamlit as st
-                    from streamlit_yellowbrick import st_yellowbrick
+from sklearn.linear_model import Lasso
+from sklearn.model_selection import train_test_split
 
-                    from sklearn.linear_model import Lasso
-                    from sklearn.model_selection import train_test_split
+from yellowbrick.datasets import load_concrete
+from yellowbrick.regressor import PredictionError
 
-                    from yellowbrick.datasets import load_concrete
-                    from yellowbrick.regressor import PredictionError
+# Load a regression dataset
+X, y = load_concrete()
 
-                    # Load a regression dataset
-                    X, y = load_concrete()
+# Create the train and test data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-                    # Create the train and test data
-                    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Instantiate the linear model and visualizer
+model = Lasso()
+visualizer = PredictionError(model)
 
-                    # Instantiate the linear model and visualizer
-                    model = Lasso()
-                    visualizer = PredictionError(model)
-
-                    visualizer.fit(X_train, y_train)  # Fit the training data to the visualizer
-                    visualizer.score(X_test, y_test)  # Evaluate the model on the test data
-                    st_yellowbrick(visualizer)        # Finalize and render the figure
-                    """
-                )
+visualizer.fit(X_train, y_train)  # Fit the training data to the visualizer
+visualizer.score(X_test, y_test)  # Evaluate the model on the test data
+st_yellowbrick(visualizer)        # Finalize and render the figure
+"""
+            , language="python")
 
     if "Alpha Section" in regression_visualizers:
 
@@ -143,28 +139,26 @@ def run_regression():
             with col1:
                 alpha_selection()
 
-            with col2:
+            col2.code(
+"""
+import numpy as np
+from sklearn.linear_model import LassoCV
+from yellowbrick.datasets import load_concrete
+from yellowbrick.regressor import AlphaSelection
 
-                st.code(
-                    """
-                    import numpy as np
-                    from sklearn.linear_model import LassoCV
-                    from yellowbrick.datasets import load_concrete
-                    from yellowbrick.regressor import AlphaSelection
+# Load the regression dataset
+X, y = load_concrete()
 
-                    # Load the regression dataset
-                    X, y = load_concrete()
+# Create a list of alphas to cross-validate against
+alphas = np.logspace(-10, 1, 400)
 
-                    # Create a list of alphas to cross-validate against
-                    alphas = np.logspace(-10, 1, 400)
-
-                    # Instantiate the linear model and visualizer
-                    model = LassoCV(alphas=alphas)
-                    visualizer = AlphaSelection(model)
-                    visualizer.fit(X, y)
-                    st_yellowbrick(visualizer)
-                    """
-                )
+# Instantiate the linear model and visualizer
+model = LassoCV(alphas=alphas)
+visualizer = AlphaSelection(model)
+visualizer.fit(X, y)
+st_yellowbrick(visualizer)
+"""
+            , language="python")
 
     return None
 
