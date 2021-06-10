@@ -39,7 +39,7 @@ def run_feature_analysis():
                 radviz()
 
             col2.code(
-"""
+                """
 import streamlit as st
 from streamlit_yellowbrick import st_yellowbrick
 
@@ -59,8 +59,9 @@ visualizer.fit(X, y)           # Fit the data to the visualizer
 visualizer.transform(X)        # Transform the data
 
 st_yellowbrick(visualizer)     # Finalize and render the figure
-"""
-            , language="python")
+""",
+                language="python",
+            )
 
     if "Parallel Coordinates" in feature_analysis_visualizers:
 
@@ -86,7 +87,7 @@ st_yellowbrick(visualizer)     # Finalize and render the figure
                 parallel_coordinates()
 
             col2.code(
-"""
+                """
 import streamlit as st
 from streamlit_yellowbrick import st_yellowbrick
 
@@ -112,8 +113,9 @@ visualizer.fit_transform(X, y)
 
 # Finalize the title and axes then display the visualization
 st_yellowbrick(visualizer)
-"""
-            , language="python")
+""",
+                language="python",
+            )
 
     if "Joint Plot Visualization" in feature_analysis_visualizers:
 
@@ -134,7 +136,7 @@ st_yellowbrick(visualizer)
                 joint_plot()
 
             col2.code(
-"""
+                """
 import streamlit as st
 from streamlit_yellowbrick import st_yellowbrick
 
@@ -149,8 +151,9 @@ visualizer = JointPlotVisualizer(columns="cement")
 
 visualizer.fit_transform(X, y)        # Fit and transform the data
 st_yellowbrick(visualizer)            # Finalize and render the figure
-"""
-            , language="python")
+""",
+                language="python",
+            )
 
     if "PCA" in feature_analysis_visualizers:
 
@@ -182,7 +185,7 @@ st_yellowbrick(visualizer)            # Finalize and render the figure
                 PCA()
 
             col2.code(
-"""
+                """
 import streamlit as st
 from streamlit_yellowbrick import st_yellowbrick
 
@@ -194,8 +197,9 @@ X, y = load_concrete()
 visualizer = PCA(scale=True, proj_features=True, projection=3)
 visualizer.fit_transform(X, y)
 st_yellowbrick(visualizer)
-"""
-            , language="python")
+""",
+                language="python",
+            )
 
     return None
 

@@ -39,9 +39,8 @@ def run_classification():
             with col1:
                 classification_report()
 
-
             col2.code(
-"""
+                """
 import streamlit as st
 from streamlit_yellowbrick import st_yellowbrick
 
@@ -70,8 +69,9 @@ visualizer = ClassificationReport(model, classes=classes, support=True)
 visualizer.fit(X_train, y_train)        # Fit the visualizer and the model
 visualizer.score(X_test, y_test)        # Evaluate the model on the test data
 st_yellowbrick(visualizer)              # Finalize and show the figure
-"""
-            , language="python")
+""",
+                language="python",
+            )
 
     if "ROCAUC" in classification_visualizers:
 
@@ -91,7 +91,6 @@ st_yellowbrick(visualizer)              # Finalize and show the figure
 
             with col1:
                 rocauc()
-
 
             col2.code(
                 """
@@ -117,8 +116,9 @@ visualizer = ROCAUC(model, classes=["not_spam", "is_spam"])
 visualizer.fit(X_train, y_train)        # Fit the training data to the visualizer
 visualizer.score(X_test, y_test)        # Evaluate the model on the test data
 st_yellowbrick(visualizer)              # Finalize and show the figure
-"""
-            , language="python")
+""",
+                language="python",
+            )
 
     if "Multi-class ROCAUC Curves" in classification_visualizers:
 
@@ -142,9 +142,8 @@ st_yellowbrick(visualizer)              # Finalize and show the figure
             with col1:
                 multi_class_rocauc()
 
-
             col2.code(
-"""
+                """
 import streamlit as st
 from streamlit_yellowbrick import st_yellowbrick
 
@@ -172,8 +171,9 @@ visualizer = ROCAUC(model, classes=["win", "loss", "draw"])
 visualizer.fit(X_train, y_train)        # Fit the training data to the visualizer
 visualizer.score(X_test, y_test)        # Evaluate the model on the test data
 st_yellowbrick(visualizer)              # Finalize and render the figure
-"""
-            , language="python")
+""",
+                language="python",
+            )
 
     if "Class Prediction Error" in classification_visualizers:
 
@@ -204,7 +204,7 @@ st_yellowbrick(visualizer)              # Finalize and render the figure
                 class_prediction_error()
 
             col2.code(
-"""
+                """
 import streamlit as st
 from streamlit_yellowbrick import st_yellowbrick
 
@@ -241,8 +241,9 @@ visualizer.score(X_test, y_test)
 
 # Draw visualization
 st_yellowbrick(visualizer)
-"""
-            , language="python")
+""",
+                language="python",
+            )
 
     if "Confusion Matrix" in classification_visualizers:
 
@@ -267,7 +268,7 @@ st_yellowbrick(visualizer)
                 confusion_matrix()
 
                 col2.code(
-"""
+                    """
 import streamlit as st
 from streamlit_yellowbrick import st_yellowbrick
 
@@ -295,8 +296,9 @@ iris_cm = ConfusionMatrix(
 iris_cm.fit(X_train, y_train)
 iris_cm.score(X_test, y_test)
 st_yellowbrick(iris_cm)
-"""
-                , language="python")
+""",
+                    language="python",
+                )
 
     if "Discrimination Threshold" in classification_visualizers:
 
@@ -320,7 +322,7 @@ st_yellowbrick(iris_cm)
                 discrimination_threshold()
 
                 col2.code(
-"""
+                    """
 import streamlit as st
 from streamlit_yellowbrick import st_yellowbrick
 
@@ -338,8 +340,9 @@ visualizer = DiscriminationThreshold(model)
 
 visualizer.fit(X, y)        # Fit the data to the visualizer
 st_yellowbrick(visualizer)  # Finalize and render the figure
-"""
-                , language="python")
+""",
+                    language="python",
+                )
 
     return None
 
