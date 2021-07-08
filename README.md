@@ -1,5 +1,7 @@
 # streamlit-yellowbrick
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/snehankekre/streamlit-yellowbrick/examples/app.py)
+
 This component provides a convenience function to display [Yellowbrick](https://www.scikit-yb.org/en/latest/index.html) [visualizers](https://www.scikit-yb.org/en/latest/api/index.html) in Streamlit.
 
 ## Installation
@@ -25,11 +27,3 @@ st_yellowbrick(visualizer)      # Finalize and render the figure
 ```
 
 ![st_yellowbrick](https://github.com/snehankekre/streamlit-yellowbrick/blob/master/_static/example.png)
-
-## Live demo
-
-View a [live demo](https://share.streamlit.io/snehankekre/streamlit-yellowbrick/examples/app.py) on Streamlit sharing!
-
-https://user-images.githubusercontent.com/20672874/121356733-c2564d80-c94e-11eb-8587-e8a4afdcc62d.mp4
-
-
